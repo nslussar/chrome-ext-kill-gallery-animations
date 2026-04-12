@@ -1,7 +1,7 @@
 chrome.action.onClicked.addListener((tab) => {
   chrome.scripting.insertCSS({
     target: { tabId: tab.id },
-    files: ["lightbox-override.css", "bxslider-override.css"]
+    files: ["lightbox-override.css", "bxslider-override.css", "modulobox-override.css"]
   });
 
   chrome.scripting.executeScript({
@@ -28,6 +28,27 @@ function applyOverrides() {
       },
       true
     );
+  }
+
+  // ModuloBox — kill spring animations by setting friction/attraction to 1 (instant snap)
+  if (typeof ModuloBox !== "undefined") {
+    var holder = document.querySelector(".mobx-holder");
+    if (holder && holder.GUID) {
+      var mbx = new ModuloBox();
+      // Override friction & attraction on all Animate instances (slider, cells, thumbs)
+      var patchAnimate = function (anim) {
+        if (!anim) return;
+        anim.forces.friction = 1;
+        anim.forces.attraction = 1;
+      };
+      patchAnimate(mbx.slider);
+      if (mbx.cells) {
+        for (var i = 0; i < mbx.cells.length; i++) {
+          patchAnimate(mbx.cells[i]);
+        }
+      }
+      patchAnimate(mbx.thumbs);
+    }
   }
 
   // bxSlider

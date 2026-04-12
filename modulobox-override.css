@@ -1,0 +1,15 @@
+.mobx-holder,
+.mobx-overlay,
+.mobx-slider,
+.mobx-item,
+.mobx-item-inner,
+.mobx-img,
+.mobx-controls,
+.mobx-caption,
+.mobx-counter,
+.mobx-thumbs,
+.mobx-thumbs-inner,
+.mobx-loader {
+  transition: none !important;
+  animation: none !important;
+}
