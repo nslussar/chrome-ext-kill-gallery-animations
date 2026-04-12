@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Lightbox2 Instant Mode",
-  "version": "1.0",
-  "description": "Click to disable fade animations and make lightbox2 images fill the viewport with no border.",
+  "name": "chrome-ext-kill-gallery-animations",
+  "version": "1.1",
+  "description": "Disables fade, slide, and transition animations in Lightbox2, bxSlider, and ModuloBox galleries.",
   "permissions": ["activeTab", "scripting"],
   "action": {
     "default_icon": {
@@ -10,7 +10,7 @@
       "48": "icons/icon48.png",
       "128": "icons/icon128.png"
     },
-    "default_title": "Enable Lightbox2 Instant Mode"
+    "default_title": "chrome-ext-kill-gallery-animations"
   },
   "background": {
     "service_worker": "background.js"
