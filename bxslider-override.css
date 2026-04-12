@@ -1,0 +1,8 @@
+.bx-wrapper .bx-viewport {
+  transition: none !important;
+}
+
+.bx-wrapper .bx-viewport * {
+  transition: none !important;
+  animation: none !important;
+}
