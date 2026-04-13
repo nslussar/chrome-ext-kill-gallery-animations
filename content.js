@@ -54,6 +54,31 @@ if (typeof ModuloBox !== "undefined") {
     }
     patchAnimate(mbx.thumbs);
   }
+
+  // Permanently override getThumbHeight so the sizing math
+  // uses the full viewport height (thumbs bar is hidden via CSS).
+  ModuloBox.prototype.getThumbHeight = function () { return 0; };
+
+  // Override getCaptionHeight to use full slider dimensions.
+  // Original subtracts topBar & caption height; we skip it entirely
+  // to avoid its unnecessary DOM reads/writes (innerHTML, clientHeight).
+  ModuloBox.prototype.getCaptionHeight = function (media, slide) {
+    slide.width = this.slider.width;
+    slide.height = this.slider.height;
+  };
+
+  // Override setMediaOffset to center without topBar offset
+  ModuloBox.prototype.setMediaOffset = function (media, slide) {
+    var size = media.dom.size;
+    media.dom.offset = {
+      top: size.height <= slide.height ? Math.round((slide.height - size.height) * 0.5) : 0,
+      left: Math.round((slide.width - size.width) * 0.5)
+    };
+    media.dom.viewport = {
+      width: this.slider.width,
+      height: this.slider.height
+    };
+  };
 }
 
 // bxSlider

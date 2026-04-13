@@ -13,3 +13,9 @@
   transition: none !important;
   animation: none !important;
 }
+
+/* Hide bottom thumbnail/navigation bar */
+.mobx-bottom-bar {
+  display: none !important;
+}
+
