@@ -28,6 +28,20 @@ function applyOverrides() {
       },
       true
     );
+
+    // Cmd-click on gallery thumbnails opens the linked image in a new tab
+    // (overriding lightbox2 which normally hijacks all clicks on these links)
+    document.querySelectorAll('a[data-lightbox]').forEach(function (link) {
+      link.addEventListener(
+        "click",
+        function (e) {
+          if (e.metaKey) {
+            e.stopImmediatePropagation();
+          }
+        },
+        true
+      );
+    });
   }
 
   // ModuloBox — kill spring animations by setting friction/attraction to 1 (instant snap)
