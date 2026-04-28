@@ -79,6 +79,20 @@ if (typeof ModuloBox !== "undefined") {
       height: this.slider.height
     };
   };
+
+  // Cmd-click on gallery thumbnails opens the linked image in a new tab
+  // (overriding ModuloBox which normally hijacks all clicks on these links)
+  document.querySelectorAll('a.mobx').forEach(function (link) {
+    link.addEventListener(
+      "click",
+      function (e) {
+        if (e.metaKey) {
+          e.stopImmediatePropagation();
+        }
+      },
+      true
+    );
+  });
 }
 
 // bxSlider
@@ -95,5 +109,19 @@ if (typeof jQuery !== "undefined" && jQuery(".bx-wrapper").length) {
       easing: null,
       auto: false
     });
+  });
+
+  // Cmd-click on gallery thumbnails opens the linked image in a new tab
+  // (overriding bxSlider which normally hijacks clicks on cloned/pager links)
+  document.querySelectorAll('.bx-wrapper a[href]').forEach(function (link) {
+    link.addEventListener(
+      "click",
+      function (e) {
+        if (e.metaKey) {
+          e.stopImmediatePropagation();
+        }
+      },
+      true
+    );
   });
 }
